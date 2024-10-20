@@ -7,3 +7,6 @@
 [submodule "packages/foundry/lib/solidity-bytes-utils"]
 	path = packages/foundry/lib/solidity-bytes-utils
 	url = https://github.com/gnsps/solidity-bytes-utils
+[submodule "packages/foundry/lib/unruggable-gateways"]
+	path = packages/foundry/lib/unruggable-gateways
+	url = https://github.com/unruggable-labs/unruggable-gateways
