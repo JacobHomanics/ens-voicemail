@@ -9,7 +9,7 @@ const OpinionForm = () => {
   // Function to train the AI with a topic and opinion
   const trainAI = async () => {
     try {
-      const res = await fetch("http://localhost:3008/train", {
+      const res = await fetch("/api/train", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -17,10 +17,11 @@ const OpinionForm = () => {
         body: JSON.stringify({ userId, topic, opinion }),
       });
 
+      const data = await res.json();
       if (res.ok) {
         console.log("AI trained successfully");
       } else {
-        console.error("Error training AI");
+        console.error("Error training AI:", data.error);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -30,7 +31,7 @@ const OpinionForm = () => {
   // Function to get the AI's response based on a topic
   const getAIResponse = async () => {
     try {
-      const res = await fetch("http://localhost:3008/respond", {
+      const res = await fetch("/api/respond", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +43,7 @@ const OpinionForm = () => {
       if (res.ok) {
         setResponse(data.response);
       } else {
-        console.error("Error getting AI response");
+        console.error("Error getting AI response:", data.error);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -66,7 +67,7 @@ const OpinionForm = () => {
         <input type="text" placeholder="Topic" value={topic} onChange={e => setTopic(e.target.value)} />
         <button onClick={getAIResponse}>Get Response</button>
 
-        {response && <p>AI Response: {response?.kwargs?.content}</p>}
+        {response && <p>{response?.kwargs?.content}</p>}
       </div>
     </div>
   );
