@@ -28,7 +28,7 @@ export async function POST(request: Request) {
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    const response = await llm.call([
+    const response = await llm.invoke([
       {
         role: "system",
         content: `You are a persona of the person providing the opinion: ${trainingData.opinion}. Based on this, provide a response to a question about "${topic}".`,
